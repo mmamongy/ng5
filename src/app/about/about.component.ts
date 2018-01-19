@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute , Router } from '@angular/router' ;
+import { DataService } from './../services/data.service';
 
 @Component({
   selector: 'app-about',
@@ -8,13 +9,15 @@ import { ActivatedRoute , Router } from '@angular/router' ;
 })
 export class AboutComponent implements OnInit {
 
-  constructor(private router: Router , private route : ActivatedRoute) {
+  goals : any ;
+  constructor(private router: Router , private route: ActivatedRoute , private _data: DataService) {
     this.route.params.subscribe(res => {
       console.log(res.id) ;
     });
    }
 
   ngOnInit() {
+    this._data.goal.subscribe(res => this.goals = res );
   }
   sendMeHome() {
     this.router.navigate(['']);
